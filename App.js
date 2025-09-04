@@ -11,14 +11,14 @@ import {
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
-  // const [] = useState();
+  const [courseGoals, setCourseGoals] = useState([]);
 
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
   }
 
   function addGoalHandler() {
-    console.log(enteredGoalText);
+    setCourseGoals((currentGoals) => [...currentGoals, enteredGoalText]);
   }
 
   return (
@@ -33,7 +33,11 @@ export default function App() {
       </View>
       <StatusBar style="auto" />,
       <View style={styles.goalsContainer}>
-        <Text style={styles.text}>test</Text>
+        {courseGoals.map((goal) => (
+          <View style={styles.goalItem} key={goal}>
+            <Text>{goal}</Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -70,5 +74,10 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 4,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
   },
 });
