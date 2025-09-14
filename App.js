@@ -18,6 +18,12 @@ export default function App() {
     ]);
   }
 
+  function deleteGoalHandler(id) {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.key !== id);
+    });
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />,
@@ -29,7 +35,13 @@ export default function App() {
             return item.key;
           }}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                id={itemData.item.key}
+                onDeleteItem={deleteGoalHandler}
+              />
+            );
           }}
         />
       </View>
